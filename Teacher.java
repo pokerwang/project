@@ -2,46 +2,49 @@ package test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Teacher {
+    private  int id;
+    private  String name;
+    private  int age;
+    private String gender;
+    private String postion;
 
-    Conn con=new Conn();
-    public Statement state()throws Exception{
-        Connection conn=con.getConnection();
-        System.out.println("实例化statement对象");
-        Statement stmt=conn.createStatement();
-        return stmt;
 
+    public  int add(Teacher t)throws Exception{
+
+        //执行插入
+
+        String sql="insert into teacher values('"+t.id+"','"+t.name+"','"+t.age+"','"+t.gender+"','"+t.postion+"')";
+        int rs=Conn.state().executeUpdate(sql);
+        Conn.state().close();
+        return rs;
     }
-    public  void add(int id,String name,int age,String gender,String postion)throws Exception{
+    public  int delete(Teacher t)throws Exception{
+
+        //执行删除
+        String sql="delete from teacher where teacher.name ='"+t.name+"'";
+        int rs=Conn.state().executeUpdate(sql);
+        Conn.state().close();
+        return rs;
+    }
+    public  int update(Teacher t)throws Exception{
 
         //执行修改
-
-        String sql="insert into teacher values('"+id+"','"+name+"','"+age+"','"+gender+"','"+postion+"')";
-        int rs=state().executeUpdate(sql);
-        state().close();
+        String sql="update teacher set teacher.name='"+t.name+"' where id='"+t.id+"'";
+        int rs=Conn.state().executeUpdate(sql);
+        Conn.state().close();
+        return rs;
     }
-    public  void delete(String name)throws Exception{
+    public  ResultSet query()throws Exception{
 
-        //执行修改
-        String sql="delete from teacher where teacher.name ='"+name+"'";
-        int rs=state().executeUpdate(sql);
-        state().close();
-    }
-    public  void update(String name,int id)throws Exception{
-
-        //执行修改
-        String sql="update teacher set teacher.name='"+name+"' where id='"+id+"'";
-        int rs=state().executeUpdate(sql);
-        state().close();
-    }
-    public  void query()throws Exception{
-
-        //执行修改
+        //执行查询
         String sql="select * from  teacher";
-        int rs=state().executeUpdate(sql);
-        state().close();
+        ResultSet teacher=Conn.state().executeQuery(sql);
+        Conn.state().close();
+        return teacher;
     }
 
 }

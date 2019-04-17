@@ -4,6 +4,7 @@ import com.sun.management.VMOption;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.Statement;
 
 public class Conn {
     //jdbc驱动 和数据库url
@@ -24,6 +25,14 @@ public class Conn {
     }
     public static Connection getConnection()throws Exception {
         return DriverManager.getConnection(Url,User,Pass);
+    }
+    public static Statement state()throws Exception{
+        Conn.getConnection();
+        //Connection conn=con.getConnection();
+        System.out.println("实例化statement对象");
+        Statement stmt=Conn.getConnection().createStatement();
+        return stmt;
+
     }
 
 

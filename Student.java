@@ -1,43 +1,44 @@
 package test;
 import  java.sql.*;
 public class Student {
+    private  int id;
+    private  String name;
+    private  int age;
+    private String gender;
+    private String clazz;
 
-    Conn con=new Conn();
-    public Statement state()throws Exception{
-        Connection conn=con.getConnection();
-        System.out.println("实例化statement对象");
-        Statement stmt=conn.createStatement();
-        return stmt;
 
-    }
+    public  int add(Student s)throws Exception{
 
-    public  void add(int id,String name,int age,String gender,String clazz)throws Exception{
-
-          //执行修改
-            String sql="insert into student values ('"+id+"','"+name+"','"+age+"','"+gender+"','"+clazz+"')";
-            int rs=state().executeUpdate(sql);
-            state().close();
+          //执行插入
+            String sql="insert into student values ('"+s.id+"','"+s.name+"','"+s.age+"','"+s.gender+"','"+s.clazz+"')";
+            int rs=Conn.state().executeUpdate(sql);
+            Conn.state().close();
+            return rs;
         }
-    public  void delete(String name)throws Exception{
+    public  int delete(Student s)throws Exception{
 
-        //执行修改
-        String sql="delete from student where student.name ='"+name+"'";
-        int rs=state().executeUpdate(sql);
-        state().close();
+        //执行删除
+        String sql="delete from student where student.name ='"+s.name+"'";
+        int rs=Conn.state().executeUpdate(sql);
+        Conn.state().close();
+        return rs;
     }
-    public  void update(int id,String name)throws Exception{
+    public  int update(Student s)throws Exception{
 
         //执行修改
-        String sql="update student set student.name='"+name+"' where id='"+id+"'";
-        int rs=state().executeUpdate(sql);
-        state().close();
+        String sql="update student set student.name='"+s.name+"' where id='"+s.id+"'";
+        int rs=Conn.state().executeUpdate(sql);
+        Conn.state().close();
+        return  rs;
     }
-    public  void query()throws Exception{
+    public  ResultSet query()throws Exception{
 
-        //执行修改
+        //执行查询
         String sql="select * from  student";
-        int rs=state().executeUpdate(sql);
-        state().close();
+        ResultSet student=Conn.state().executeQuery(sql);
+        Conn.state().close();
+        return student;
     }
 
 
