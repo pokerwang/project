@@ -1,4 +1,4 @@
-package test;
+package day;
 import  java.sql.*;
 public class Student {
     private  int id;
@@ -10,12 +10,12 @@ public class Student {
 
     public  int add(Student s)throws Exception{
 
-          //执行插入
-            String sql="insert into student values ('"+s.id+"','"+s.name+"','"+s.age+"','"+s.gender+"','"+s.clazz+"')";
-            int rs=Conn.state().executeUpdate(sql);
-            Conn.state().close();
-            return rs;
-        }
+        //执行插入
+        String sql="insert into student values ('"+s.id+"','"+s.name+"','"+s.age+"','"+s.gender+"','"+s.clazz+"')";
+        int rs=Conn.state().executeUpdate(sql);
+        Conn.state().close();
+        return rs;
+    }
     public  int delete(Student s)throws Exception{
 
         //执行删除
@@ -32,11 +32,21 @@ public class Student {
         Conn.state().close();
         return  rs;
     }
-    public  ResultSet query()throws Exception{
+    public Student query()throws Exception{
 
         //执行查询
         String sql="select * from  student";
-        ResultSet student=Conn.state().executeQuery(sql);
+        ResultSet rs=Conn.state().executeQuery(sql);
+        Student student =new Student();
+        while (rs.next()){
+            student.id=rs.getInt("id");
+            student.age=rs.getInt("age");
+            student.gender=rs.getString("gender");
+            student.clazz=rs.getString("clazz");
+            student.name=rs.getString("name");
+
+        }
+
         Conn.state().close();
         return student;
     }
@@ -44,7 +54,7 @@ public class Student {
 
 
 
-    }
+}
 
 
 

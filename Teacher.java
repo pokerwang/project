@@ -1,4 +1,4 @@
-package test;
+package day;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -38,11 +38,20 @@ public class Teacher {
         Conn.state().close();
         return rs;
     }
-    public  ResultSet query()throws Exception{
+    public  Teacher query()throws Exception{
 
         //执行查询
         String sql="select * from  teacher";
-        ResultSet teacher=Conn.state().executeQuery(sql);
+        ResultSet rs=Conn.state().executeQuery(sql);
+        Teacher teacher =new Teacher();
+        while (rs.next()){
+            teacher.id=rs.getInt("id");
+            teacher.age=rs.getInt("age");
+            teacher.gender=rs.getString("gender");
+            teacher.postion=rs.getString("postion");
+            teacher.name=rs.getString("name");
+
+        }
         Conn.state().close();
         return teacher;
     }

@@ -1,4 +1,4 @@
-package test;
+package day;
 
 import com.sun.management.VMOption;
 
