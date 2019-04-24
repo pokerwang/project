@@ -2,16 +2,18 @@ package day;
 
 public class JDBC {
     public static void main(String[] args) throws Exception{
-        Student student=new Student();
-      //  student.add();
-        //student.update();
-        ///student.delete();
-        //student.query();
-        Teacher teacher =new Teacher();
-        //teacher.add();
-        //teacher.update();
-        //teacher.delete();
-        teacher.query();
+       Operation operation =new Operation();
+
+       // operation.adds();
+        //operation.addt();
+       // operation.deletes();
+       // operation.deletet();
+        operation.querys();
+        operation.queryt();
+       // operation.updates();
+       // operation.updatet();
+
+
     }
 
 }
