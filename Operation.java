@@ -75,7 +75,6 @@ public class Operation {
         //执行查询
         String sql="select * from  teacher";
         ResultSet rs=Conn.state().executeQuery(sql);
-        Teacher teacher =new Teacher();
         while (rs.next()){
             teacher.id=rs.getInt("id");
             teacher.age=rs.getInt("age");
